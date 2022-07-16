@@ -18,8 +18,6 @@ namespace Heroes.Models
 
         public int CurrentPower { get; set; }
 
-        public int UserId { get; set; }
-
         public User User { get; set; }
     }
 }

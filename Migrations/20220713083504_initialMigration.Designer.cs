@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Heroes.Migrations
 {
     [DbContext(typeof(HeroesContext))]
-    [Migration("20220712220029_initialMigration")]
+    [Migration("20220713083504_initialMigration")]
     partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,15 +46,12 @@ namespace Heroes.Migrations
                     b.Property<string>("SuitColors")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Heroes");
                 });
@@ -259,7 +256,7 @@ namespace Heroes.Migrations
                 {
                     b.HasOne("Heroes.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

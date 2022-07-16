@@ -164,15 +164,14 @@ namespace Heroes.Migrations
                     SuitColors = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartingPower = table.Column<int>(type: "int", nullable: false),
                     CurrentPower = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Heroes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Heroes_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Heroes_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -218,9 +217,9 @@ namespace Heroes.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Heroes_UserId1",
+                name: "IX_Heroes_UserId",
                 table: "Heroes",
-                column: "UserId1");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

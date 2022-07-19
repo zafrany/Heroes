@@ -50,6 +50,7 @@ namespace Heroes.DataGeneration
                     SuitColors = "Red, Blue, Green",
                     StartingPower = 100,
                     CurrentPower = 105,
+                    RemainingTrains = 5,
                     User = user1,
                 };
                 _context.Heroes.Add(hero);
@@ -62,6 +63,7 @@ namespace Heroes.DataGeneration
                     SuitColors = "Red, Blue, Green",
                     StartingPower = 100,
                     CurrentPower = 105,
+                    RemainingTrains = 5,
                     User = user2,
                 };
                 _context.Heroes.Add(hero2);
@@ -74,6 +76,7 @@ namespace Heroes.DataGeneration
                     SuitColors = "Red, Blue, Green",
                     StartingPower = 100,
                     CurrentPower = 105,
+                    RemainingTrains = 5,
                     User = user1,
                 };
                 _context.Heroes.Add(hero3);
@@ -86,6 +89,7 @@ namespace Heroes.DataGeneration
                     SuitColors = "Red, Blue, Green",
                     StartingPower = 100,
                     CurrentPower = 105,
+                    RemainingTrains = 5,
                     User = null,
                 };
                 _context.Heroes.Add(hero4);

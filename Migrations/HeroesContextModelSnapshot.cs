@@ -35,6 +35,9 @@ namespace Heroes.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RemainingTrains")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("StartedTrainingDate")
                         .HasColumnType("datetime2");
 

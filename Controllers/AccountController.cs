@@ -29,5 +29,18 @@ namespace Heroes.Controllers
 
             return Unauthorized();
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] SignInModel signInModel)
+        {
+            var result = await _accountRepository.LoginAsync(signInModel);
+
+            if (string.IsNullOrEmpty(result))
+            {
+                return Unauthorized();
+            }
+
+            return Ok(result);
+        }
     }
 }

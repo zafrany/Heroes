@@ -1,4 +1,5 @@
 ﻿using Heroes.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ namespace Heroes.Controllers
             return Ok(heroes);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetHeroesByUserId([FromRoute]int id)
         {

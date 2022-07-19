@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Heroes.Migrations
 {
     [DbContext(typeof(HeroesContext))]
-    [Migration("20220713083504_initialMigration")]
-    partial class initialMigration
+    [Migration("20220717070339_intial-migration")]
+    partial class intialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,9 @@ namespace Heroes.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RemainingTrains")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("StartedTrainingDate")
                         .HasColumnType("datetime2");

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Heroes.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class intialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -164,6 +164,7 @@ namespace Heroes.Migrations
                     SuitColors = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartingPower = table.Column<int>(type: "int", nullable: false),
                     CurrentPower = table.Column<int>(type: "int", nullable: false),
+                    RemainingTrains = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>

@@ -1,9 +1,7 @@
 ﻿using Heroes.Repository;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Heroes.Controllers
@@ -13,10 +11,12 @@ namespace Heroes.Controllers
     public class HeroesController : ControllerBase
     {
         private readonly IHeroRepository _heroRepository;
+        private readonly IAccountRepository _accountRepository;
 
-        public HeroesController(IHeroRepository heroRepository)
+        public HeroesController(IHeroRepository heroRepository, IAccountRepository accountRepository)
         {
             _heroRepository = heroRepository;
+            _accountRepository = accountRepository;        
         }
 
         [HttpGet("")]
@@ -31,6 +31,15 @@ namespace Heroes.Controllers
         public async Task<IActionResult> GetHeroesByUserId([FromRoute]int id)
         {
             var heroes = await _heroRepository.GetHeroesByUserId(id).ToListAsync();
+            return Ok(heroes);
+        }
+
+        [Authorize]
+        [HttpGet("myHeroes")]
+        public async Task<IActionResult> GetMyHeroes()
+        {
+            string id = _accountRepository.GetUserId(User);
+            var heroes = await _heroRepository.GetMyHeroes(id).ToListAsync();
             return Ok(heroes);
         }
     }

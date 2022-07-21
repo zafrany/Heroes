@@ -3,6 +3,7 @@ using Heroes.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Heroes.Repository
@@ -24,6 +25,11 @@ namespace Heroes.Repository
         public IQueryable<Hero> GetHeroesByUserId(int userId)
         {
             return _context.Heroes.Where(hero => hero.User.Id == userId.ToString());
+        }
+
+        public IQueryable<Hero> GetMyHeroes(string id)
+        {
+            return _context.Heroes.Where(hero => hero.User.Id == id);
         }
     }
 }

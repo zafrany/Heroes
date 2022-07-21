@@ -9,5 +9,6 @@ namespace Heroes.Repository
     {
         IQueryable<Hero> GetAllHeroes();
         IQueryable<Hero> GetHeroesByUserId(int userId);
+        IQueryable<Hero> GetMyHeroes(string userClaims);
     }
 }

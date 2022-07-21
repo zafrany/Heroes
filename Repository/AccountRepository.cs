@@ -42,8 +42,12 @@ namespace Heroes.Repository
             {
                 return null;
             }
+
+            var user = await _userManager.FindByEmailAsync(signInModel.Email);
+
             var authClaims = new List<Claim>
             {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(ClaimTypes.Name, signInModel.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
@@ -57,6 +61,11 @@ namespace Heroes.Repository
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public string GetUserId(ClaimsPrincipal userClaims)
+        {
+            return _userManager.GetUserId(userClaims);
         }
     }
 }

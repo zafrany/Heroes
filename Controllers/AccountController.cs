@@ -2,7 +2,9 @@
 using Heroes.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using System.Threading.Tasks;
+
 
 namespace Heroes.Controllers
 {
@@ -27,11 +29,11 @@ namespace Heroes.Controllers
                 return Ok(result.Succeeded);
             }
 
-            return Unauthorized();
+            return BadRequest();
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] SignInModel signInModel)
+        public async Task<ActionResult> Login([FromBody] SignInModel signInModel)
         {
             var result = await _accountRepository.LoginAsync(signInModel);
 
@@ -40,7 +42,10 @@ namespace Heroes.Controllers
                 return Unauthorized();
             }
 
-            return Ok(result);
+            return Ok(new
+            {
+                token = result
+            });
         }
     }
 }

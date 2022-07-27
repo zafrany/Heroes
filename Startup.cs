@@ -103,6 +103,8 @@ namespace Heroes
             {
                 endpoints.MapControllers();
             });
+
+            //logs here
         }
     }
 }

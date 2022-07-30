@@ -70,12 +70,6 @@ namespace Heroes
                     builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
             });
-            /*
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Heroes", Version = "v1" });
-            });
-            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,8 +81,6 @@ namespace Heroes
                                                         app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<UserManager<User>>());
                 dataGenerator.generate();
                 app.UseDeveloperExceptionPage();
-                //app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Heroes v1"));
             }
 
             app.UseHttpsRedirection();

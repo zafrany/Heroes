@@ -1,5 +1,6 @@
 ﻿using Heroes.Models;
 using Heroes.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -20,7 +21,7 @@ namespace Heroes.Controllers
         }
 
         [HttpPost("signup")]
-        public async Task<IActionResult> SignUp([FromBody]SignUpModel signUpModel)
+        public async Task<IActionResult> SignUp([FromBody] SignUpModel signUpModel)
         {
             var result = await _accountRepository.SignUpAsync(signUpModel);
 

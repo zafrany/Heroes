@@ -4,14 +4,16 @@ using Heroes.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Heroes.Migrations
 {
     [DbContext(typeof(HeroesContext))]
-    partial class HeroesContextModelSnapshot : ModelSnapshot
+    [Migration("20220728083208_hero-model-annotations-and-last-date-trained-added")]
+    partial class heromodelannotationsandlastdatetrainedadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

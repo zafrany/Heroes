@@ -4,14 +4,16 @@ using Heroes.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Heroes.Migrations
 {
     [DbContext(typeof(HeroesContext))]
-    partial class HeroesContextModelSnapshot : ModelSnapshot
+    [Migration("20220728003230_heroPowerIntToDouble")]
+    partial class heroPowerIntToDouble
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,17 +29,12 @@ namespace Heroes.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Ability")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("CurrentPower")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("LastTrainingDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RemainingTrains")
@@ -50,7 +47,6 @@ namespace Heroes.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("SuitColors")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")

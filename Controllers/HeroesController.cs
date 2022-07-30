@@ -3,9 +3,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System;
+using Heroes.Models;
+using System.Linq;
 
 namespace Heroes.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class HeroesController : ControllerBase
@@ -26,21 +30,28 @@ namespace Heroes.Controllers
             return Ok(heroes);
         }
 
-        [Authorize]
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetHeroesByUserId([FromRoute]int id)
-        {
-            var heroes = await _heroRepository.GetHeroesByUserId(id).ToListAsync();
-            return Ok(heroes);
-        }
-
-        [Authorize]
         [HttpGet("myHeroes")]
         public async Task<IActionResult> GetMyHeroes()
         {
             string id = _accountRepository.GetUserId(User);
             var heroes = await _heroRepository.GetMyHeroes(id).ToListAsync();
             return Ok(heroes);
+        }
+
+        [HttpPatch(":{heroId}/RemainingTrains")]
+        public async Task<IActionResult> TrainHero([FromRoute] int heroId)
+        {
+            string userId = _accountRepository.GetUserId(User);
+            var hero = await _heroRepository.GetHeroByHeroId(heroId).ToListAsync();
+            var res = hero.FirstOrDefault();
+            if (res.User.Id != userId || res.RemainingTrains <= 0)
+            {
+                return BadRequest();
+            }
+            
+            res = _heroRepository.TrainHero(res);
+            return Ok(res);
+
         }
     }
 }

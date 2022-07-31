@@ -44,7 +44,7 @@ namespace Heroes.Controllers
             string userId = _accountRepository.GetUserId(User);
             var hero = await _heroRepository.GetHeroByHeroId(heroId).ToListAsync();
             var res = hero.FirstOrDefault();
-            if (res.User.Id != userId || res.RemainingTrains <= 0)
+            if (res.User == null || res.User.Id != userId || res.RemainingTrains <= 0)
             {
                 return BadRequest();
             }

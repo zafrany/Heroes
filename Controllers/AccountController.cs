@@ -20,6 +20,12 @@ namespace Heroes.Controllers
             _accountRepository = accountRepository;
         }
 
+        [HttpGet("loggedUser")]
+        public string getLoggedUser()
+        {
+            return _accountRepository.GetUserName(User);
+        }
+
         [HttpPost("signup")]
         public async Task<IActionResult> SignUp([FromBody] SignUpModel signUpModel)
         {

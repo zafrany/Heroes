@@ -10,5 +10,6 @@ namespace Heroes.Repository
         Task<IdentityResult> SignUpAsync(SignUpModel signUpModel);
         Task<string> LoginAsync(SignInModel signInModel);
         public string GetUserId(ClaimsPrincipal userClaims);
+        public string GetUserName(ClaimsPrincipal userClaims);
     }
 }

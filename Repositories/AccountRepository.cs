@@ -67,5 +67,10 @@ namespace Heroes.Repository
         {
             return _userManager.GetUserId(userClaims);
         }
+
+        public string GetUserName(ClaimsPrincipal userClaims)
+        {
+            return _userManager.GetUserName(userClaims);
+        }
     }
 }

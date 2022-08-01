@@ -9,10 +9,12 @@ namespace Heroes.Repository
     public class HeroRepository : IHeroRepository
     {
         private readonly HeroesContext _context;
+        
 
         public HeroRepository(HeroesContext context)
         {
             _context = context;
+            
         }
 
         public IQueryable<Hero> GetAllHeroes()
@@ -22,7 +24,7 @@ namespace Heroes.Repository
 
         public IQueryable<Hero> GetHeroesByUserId(string userId)
         {
-            return _context.Heroes.Where(hero => hero.User.Id == userId);
+            return _context.Heroes.Where(hero => hero.User.Id == userId);           
         }
 
         public IQueryable<Hero> GetMyHeroes(string id)

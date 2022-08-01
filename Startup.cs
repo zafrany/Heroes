@@ -41,7 +41,7 @@ namespace Heroes
             services.AddControllers().AddNewtonsoftJson();
             services.AddScoped<IHeroRepository, HeroRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
-            //services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup));
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<HeroesContext>().AddDefaultTokenProviders();
 
             services.AddAuthentication(option =>

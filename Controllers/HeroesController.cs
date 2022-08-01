@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System;
 using Heroes.Models;
 using System.Linq;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace Heroes.Controllers
 {
@@ -16,18 +18,22 @@ namespace Heroes.Controllers
     {
         private readonly IHeroRepository _heroRepository;
         private readonly IAccountRepository _accountRepository;
+        private readonly IMapper _mapper;
 
-        public HeroesController(IHeroRepository heroRepository, IAccountRepository accountRepository)
+        public HeroesController(IHeroRepository heroRepository, IAccountRepository accountRepository, IMapper mapper)
         {
             _heroRepository = heroRepository;
-            _accountRepository = accountRepository;        
+            _accountRepository = accountRepository;
+            _mapper = mapper;
         }
 
         [HttpGet("")]
         public async Task<IActionResult> GetAllHeroes()
         {
             var heroes = await _heroRepository.GetAllHeroes().ToListAsync();
-            return Ok(heroes);
+            var result = _mapper.Map<List<Hero>>(heroes);
+
+            return Ok(result);
         }
 
         [HttpGet("myHeroes")]

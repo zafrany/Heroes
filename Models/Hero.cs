@@ -33,5 +33,14 @@ namespace Heroes.Models
         public int RemainingTrains { get; set; }
 
         public User User { get; set; }
+
+        public override string ToString()
+        {
+            return "Id: " + this.Id + "\n" + "Name: " + this.Name + "\n" + "Ability: " + this.Ability + "\n";
+
+
+        }
     }
+
+    
 }

@@ -1,5 +1,6 @@
 using Heroes.Data;
 using Heroes.DataGeneration;
+using Heroes.Logger;
 using Heroes.Models;
 using Heroes.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,8 +17,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NLog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +31,7 @@ namespace Heroes
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/Logger/nlog.config"));
             Configuration = configuration;
         }
 
@@ -43,6 +47,7 @@ namespace Heroes
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddAutoMapper(typeof(Startup));
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<HeroesContext>().AddDefaultTokenProviders();
+            services.AddSingleton<ILoggerManager, LoggerManager>();
 
             services.AddAuthentication(option =>
             {
@@ -95,8 +100,6 @@ namespace Heroes
             {
                 endpoints.MapControllers();
             });
-
-            //logs here
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using Heroes.Models;
 using Heroes.Repository;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 
@@ -18,12 +15,6 @@ namespace Heroes.Controllers
         public AccountController(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
-        }
-
-        [HttpGet("loggedUser")]
-        public string getLoggedUser()
-        {
-            return _accountRepository.GetUserName(User);
         }
 
         [HttpPost("signup")]

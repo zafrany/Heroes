@@ -1,29 +1,22 @@
 using Heroes.Data;
 using Heroes.DataGeneration;
+using Heroes.Helpers;
 using Heroes.Logger;
 using Heroes.Models;
 using Heroes.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using NLog;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Heroes
 {
@@ -41,7 +34,6 @@ namespace Heroes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<HeroesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HeroesDB")));
-            //services.AddControllers();
             services.AddControllers().AddNewtonsoftJson();
             services.AddScoped<IHeroRepository, HeroRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
@@ -58,7 +50,7 @@ namespace Heroes
             {
                 options.SaveToken = true;
                 options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                options.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
@@ -95,6 +87,7 @@ namespace Heroes
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

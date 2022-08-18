@@ -1,6 +1,7 @@
 ﻿using Heroes.Models;
 using Heroes.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 
@@ -16,6 +17,8 @@ namespace Heroes.Controllers
         {
             _accountRepository = accountRepository;
         }
+
+        
 
         [HttpPost("signup")]
         public async Task<IActionResult> SignUp([FromBody] SignUpModel signUpModel)
